@@ -5,12 +5,11 @@ import { Routes, RouterModule } from '@angular/router';
 import { AuthModule } from './auth/auth.module';
 
 import { AppComponent } from './app.component';
-import { HeaderBarComponent } from './header-bar/header-bar.component';
-import { FooterBarComponent } from './footer-bar/footer-bar.component';
 import { UserService } from './user.service';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: '/dashboard'},
+  { path: 'home', loadChildren: './home/home.module#HomeModule'},
   {path: 'dashboard', loadChildren: './dashboard/dashboard.module#DashboardModule'},
   {path: 'login', loadChildren: './login/login.module#LoginModule'},
   {path: '**', redirectTo: 'login'}
@@ -20,8 +19,6 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderBarComponent,
-    FooterBarComponent,
   ],
   imports: [
     BrowserModule,
