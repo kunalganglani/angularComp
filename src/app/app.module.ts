@@ -15,6 +15,7 @@ const routes: Routes = [
   { path: 'home', loadChildren: './home/home.module#HomeModule'},
   {path: 'dashboard', loadChildren: './dashboard/dashboard.module#DashboardModule'},
   {path: 'login', loadChildren: './login/login.module#LoginModule'},
+  {path: 'register', loadChildren: './register/register.module#RegisterModule'},
   {path: '**', redirectTo: 'login'}
 ];
 
