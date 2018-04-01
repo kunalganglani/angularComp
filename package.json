@@ -5,6 +5,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve --aot",
+    "startall": "ng serve --aot | nodemon ./server/server",
     "build": "ng build --prod",
     "test": "ng test",
     "lint": "ng lint",
