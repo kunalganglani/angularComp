@@ -92,7 +92,7 @@ router.post('/register', (req, res) => {
   });
 
   router.post('/login', (req, res) => {
-    let userData = req.body
+    let userData = req.body;
     User.findOne({email: userData.email}, (err, user) => {
       if (err) {
         console.log(err)    

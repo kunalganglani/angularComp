@@ -1,13 +1,68 @@
-
+<!-- 
 <mat-card>
   <form class="example-form">
       <mat-form-field class="example-full-width">
-          <input matInput placeholder="Username" [(ngModel)]="registerUserData.email" name="email">
+        <input required  matInput placeholder="Last Name" [(ngModel)]="registerUserData.lastName" name="email">
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <input required matInput placeholder="Contact Number" [(ngModel)]="registerUserData.contactNumber" name="email">
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <input required matInput placeholder="Email id" [(ngModel)]="registerUserData.email" name="email">
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Gender" [(ngModel)]="registerUserData.gender" name="email">
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Alternate Contact Number" [(ngModel)]="registerUserData.alternateContactNumber" name="email">
+      </mat-form-field>
+    <mat-form-field class="example-full-width">
+          <input required matInput placeholder="Username" [(ngModel)]="registerUserData.userName" name="email">
         </mat-form-field>
       
         <mat-form-field class="example-full-width">
-            <input type="password" matInput placeholder="Password" [(ngModel)]="registerUserData.password" name="password">
+            <input required type="password" matInput placeholder="Password" [(ngModel)]="registerUserData.password" name="password">
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+            <input required type="password" matInput placeholder="Confirm Password">
         </mat-form-field>
     </form>
-    <button mat-button (click)="registerUser()">Register</button>
+    <button color="primary" mat-button (click)="registerUser()">Register</button>
+</mat-card> -->
+
+<mat-card>
+    <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
+        <mat-form-field class="example-full-width">
+            <input required matInput placeholder="First Name" formControlName="firstName">
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+            <input required matInput placeholder="Last Name" formControlName="lastName">
+        </mat-form-field>
+        <mat-radio-group formControlName="gender">
+                <mat-radio-button value="Male">Male</mat-radio-button>
+                <mat-radio-button value="Female">Female</mat-radio-button>
+                <mat-radio-button value="Other">Other</mat-radio-button>
+        </mat-radio-group>
+        <mat-form-field class="example-full-width">
+            <input required matInput placeholder="Contact Number" formControlName="contactNumber">
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="Alternate Contact Number" formControlName="alternateContactNumber">
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+            <input required matInput placeholder="Email Id" formControlName="email">
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+            <input required matInput placeholder="Username" formControlName="username">
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+            <input type="password" required matInput placeholder="Password" formControlName="password">
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+            <input type="password" required matInput placeholder="Confirm Password" formControlName="confirmPassword">
+        </mat-form-field>
+        <button type="submit" mat-button [disabled]="!form.valid">Submit</button>
+        <button type="reset" mat-button>Reset</button>
+    </form>
 </mat-card>

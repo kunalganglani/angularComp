@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth/services/auth.service';
+import { FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-register',
@@ -8,25 +9,84 @@ import { AuthService } from '../auth/services/auth.service';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
+  form;
   registerUserData = {
+    firstName: '',
+    lastName: '',
+    contactNumber: '',
+    gender: '',
+    alternateContactNumber: '',
+    userName: '',
     email: '',
     password: ''
   };
-  constructor(private _auth: AuthService,
+  constructor(private formBuilder: FormBuilder,
+    private _auth: AuthService,
     private _router: Router) { }
 
 ngOnInit() {
+  this.form = this.formBuilder.group({
+    // medium: this.formBuilder.control('Movies'),
+    // passing default values
+    // alphanumeric string, with support for dash, space and /
+    firstName: this.formBuilder.control('', Validators.compose([
+    Validators.required,
+    Validators.pattern('[\\w\\-\\s\\/]+')
+    ])),
+    lastName: this.formBuilder.control('', Validators.compose([
+      Validators.required,
+      Validators.pattern('[\\w\\-\\s\\/]+')
+    ])),
+    contactNumber: this.formBuilder.control('', Validators.required),
+    alternateContactNumber: this.formBuilder.control(''),
+    email: this.formBuilder.control('', Validators.required),
+    gender: this.formBuilder.control(''),
+    username: this.formBuilder.control('', Validators.required),
+    password: this.formBuilder.control('', Validators.required),
+    confirmPassword: this.formBuilder.control('', Validators.required),
+    // category: this.formBuilder.control(''),
+    // year: this.formBuilder.control('', this.yearValidator),
+    // you dont need to call your custom validators, form control will call it. 
+  });
 }
 
-registerUser() {
-this._auth.registerUser(this.registerUserData)
+registerUser(userItem) {
+this._auth.registerUser(userItem)
 .subscribe(
 res => {
-localStorage.setItem('token', res.token)
-this._router.navigate(['/special'])
+localStorage.setItem('token', res.token);
+this._router.navigate(['/special']);
 },
 err => console.log(err)
 );
+}
+
+
+yearValidator(control) {
+  if (control.value.trim().length === 0) {
+    return null;
+  }
+  const year = parseInt(control.value, 10);
+  const min = 1900;
+  const max = 2100;
+  if ( year >= min && year <= max) {
+    return null;
+  } else {
+    // return { 'year': true }; // returning that year object is valid.. 
+    // your can return an object in any format.
+    return {
+      'year': {
+        min,
+        max
+      }
+    };
+  }
+}
+
+
+onSubmit(userItem) {
+  this.registerUser(userItem);
+  // this.mediaItemService.add(mediaItem);
 }
 
 }
