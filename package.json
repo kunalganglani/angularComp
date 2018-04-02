@@ -2,6 +2,10 @@
   "name": "angular-interview",
   "version": "0.0.0",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kunalganglani/angularComp.git"
+  },
   "homepage": "https://kunalganglani.github.io/angularComp",
   "scripts": {
     "ng": "ng",
