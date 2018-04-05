@@ -7,7 +7,7 @@ GET  http://localhost:3000/api/events
 
 ###
 
-GET  http://localhost:3000/api/special
+GET  http://localhost:3000/api/members
 Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWJqZWN0IjoiNWFjMDQyMWUwZWEzNjM3ZmYxMzk5OWQ3IiwiaWF0IjoxNTIyNTYzMDI5fQ.lA0KgufrtSGs9jpaFlaJMtsjPEsOLABEL3xHWOybyoE
 
 ###

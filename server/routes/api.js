@@ -29,7 +29,7 @@ function verifyToken(req, res, next) {
   req.userId = payload.subject
   next()
 }
-router.get('/special', verifyToken, (req, res) => {
+router.get('/members', verifyToken, (req, res) => {
   let specialEvents = [
     {
       "_id": "1",

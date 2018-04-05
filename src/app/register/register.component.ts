@@ -47,7 +47,7 @@ export class RegisterComponent implements OnInit {
       confirmPassword: this.formBuilder.control('', Validators.required),
       // category: this.formBuilder.control(''),
       // year: this.formBuilder.control('', this.yearValidator),
-      // you dont need to call your custom validators, form control will call it. 
+      // you dont need to call your custom validators, form control will call it.
     });
   }
 
@@ -57,7 +57,7 @@ export class RegisterComponent implements OnInit {
         res => {
           this.openSnackBar('Registration Successful', 'OK');
           localStorage.setItem('token', res.token);
-          this._router.navigate(['/special']);
+          this._router.navigate(['/members']);
         },
         err => {
           this.openSnackBar(`ERROR ${err}`, 'Retry');
@@ -83,7 +83,7 @@ export class RegisterComponent implements OnInit {
     if (year >= min && year <= max) {
       return null;
     } else {
-      // return { 'year': true }; // returning that year object is valid.. 
+      // return { 'year': true }; // returning that year object is valid..
       // your can return an object in any format.
       return {
         'year': {
