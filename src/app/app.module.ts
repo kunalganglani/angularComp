@@ -6,20 +6,20 @@ import { AuthModule } from './auth/auth.module';
 import { AppComponent } from './app.component';
 import { HeaderBarComponent } from './header-bar/header-bar.component';
 import { FooterBarComponent } from './footer-bar/footer-bar.component';
+import { MaterialModule } from './shared/material.module';
 
 import { UserService } from './user.service';
 import { HttpModule } from '@angular/http';
-import { EventService } from './event.service';
 
 const routes: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: '/home' },
-  { path: 'home', loadChildren: './home/home.module#HomeModule' },
-  { path: 'dashboard', loadChildren: './dashboard/dashboard.module#DashboardModule' },
-  { path: 'login', loadChildren: './login/login.module#LoginModule' },
-  { path: 'register', loadChildren: './register/register.module#RegisterModule' },
-  { path: 'events', loadChildren: './events/events.module#EventsModule' },
-  { path: 'members', loadChildren: './members/members.module#MembersModule' },
-  { path: '**', redirectTo: 'dashboard' }
+  { path: '', pathMatch: 'full', redirectTo: '/home'},
+  { path: 'home', loadChildren: './home/home.module#HomeModule'},
+  {path: 'dashboard', loadChildren: './dashboard/dashboard.module#DashboardModule'},
+  {path: 'login', loadChildren: './login/login.module#LoginModule'},
+  {path: 'register', loadChildren: './register/register.module#RegisterModule'},
+  {path: 'events', loadChildren: './events/events.module#EventsModule'},
+  {path: 'members', loadChildren: './members/members.module#MembersModule'},
+  {path: '**', redirectTo: 'dashboard'}
 ];
 
 
@@ -34,9 +34,10 @@ const routes: Routes = [
     BrowserAnimationsModule,
     AuthModule,
     HttpModule,
+    MaterialModule,
     RouterModule.forRoot(routes),
   ],
-  providers: [UserService, EventService],
+  providers: [ UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

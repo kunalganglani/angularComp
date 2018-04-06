@@ -39,19 +39,20 @@
         <mat-form-field class="example-full-width">
             <input required matInput placeholder="Last Name" formControlName="lastName">
         </mat-form-field>
+        <label>Gender: </label>  
         <mat-radio-group formControlName="gender">
                 <mat-radio-button value="Male">Male</mat-radio-button>
                 <mat-radio-button value="Female">Female</mat-radio-button>
                 <mat-radio-button value="Other">Other</mat-radio-button>
         </mat-radio-group>
         <mat-form-field class="example-full-width">
-            <input required matInput placeholder="Contact Number" formControlName="contactNumber">
+            <input type="tel" required matInput placeholder="Contact Number" formControlName="contactNumber">
         </mat-form-field>
         <mat-form-field class="example-full-width">
-            <input matInput placeholder="Alternate Contact Number" formControlName="alternateContactNumber">
+            <input type="tel" matInput placeholder="Alternate Contact Number" formControlName="alternateContactNumber">
         </mat-form-field>
         <mat-form-field class="example-full-width">
-            <input required matInput placeholder="Email Id" formControlName="email">
+            <input type="email" required matInput placeholder="Email Id" formControlName="email">
         </mat-form-field>
         <mat-form-field class="example-full-width">
             <input required matInput placeholder="Username" formControlName="username">

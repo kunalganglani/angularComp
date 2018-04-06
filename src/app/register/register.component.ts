@@ -19,7 +19,8 @@ export class RegisterComponent implements OnInit {
     alternateContactNumber: '',
     userName: '',
     email: '',
-    password: ''
+    password: '',
+    confirmPassword: ''
   };
   constructor(public snackBar: MatSnackBar, private formBuilder: FormBuilder,
     private _auth: AuthService,
@@ -42,8 +43,15 @@ export class RegisterComponent implements OnInit {
       alternateContactNumber: this.formBuilder.control(''),
       email: this.formBuilder.control('', Validators.required),
       gender: this.formBuilder.control(''),
-      username: this.formBuilder.control('', Validators.required),
-      password: this.formBuilder.control('', Validators.required),
+      username: this.formBuilder.control('', Validators.compose([
+        Validators.required,
+        // Validators.pattern('[\\w\\-\\s\\/]+'),
+      ])),
+      password: this.formBuilder.control('', Validators.compose([
+        Validators.required,
+        // Validators.pattern('[\\w\\-\\s\\/]+')
+        this.isPasswordMatching.bind(this)
+      ])),
       confirmPassword: this.formBuilder.control('', Validators.required),
       // category: this.formBuilder.control(''),
       // year: this.formBuilder.control('', this.yearValidator),
@@ -72,7 +80,16 @@ export class RegisterComponent implements OnInit {
     });
   }
 
-
+  isPasswordMatching(control) {
+    if (this.registerUserData.password !== this.registerUserData.confirmPassword ) {
+      return {
+        'password': false
+      };
+    }
+    return {
+      'password': true
+    };
+  }
   yearValidator(control) {
     if (control.value.trim().length === 0) {
       return null;
