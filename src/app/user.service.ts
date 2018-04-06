@@ -1,24 +1,22 @@
 import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
-import 'rxjs/add/operator/map';
-import { map } from 'rxjs/operator/map';
+// import 'rxjs/add/operator/map';
+// import { map } from 'rxjs/operator/map';
 import { User } from './user';
-import { Observable } from 'rxjs/Observable';
+// import { Observable } from 'rxjs/Observable';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class UserService {
 
-  private _userUrl = '../assets/user.json';
+  private _usersUrl = 'http://localhost:3000/api/users';
 
-  constructor(private _http: Http) { }
+  constructor(private _http: HttpClient) { }
 
-  getUser(id: number): Observable<User> {
-    return this._http.get(this._userUrl).map((response) =>
-    <User>response.json());
+  getUsers() {
+    return this._http.get<any>(this._usersUrl);
   }
-
-  getUsers(): Observable<User> {
-    return this._http.get(this._userUrl).map((response) =>
-    <User>response.json());
-  }
+  // getUsers(): Observable<User> {
+  //   return this._http.get(this._userUrl).map((response) =>
+  //   <User>response.json());
+  // }
 }
