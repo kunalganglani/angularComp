@@ -39,14 +39,26 @@ export class RegisterComponent implements OnInit {
         Validators.required,
         Validators.pattern('[\\w\\-\\s\\/]+')
       ])),
-      contactNumber: this.formBuilder.control('', Validators.required),
-      alternateContactNumber: this.formBuilder.control(''),
-      email: this.formBuilder.control('', Validators.required),
+      contactNumber: this.formBuilder.control('', Validators.compose([
+        Validators.pattern('^[0-9 ()+-]+$'),
+        Validators.required
+      ])
+    ),
+      alternateContactNumber: this.formBuilder.control('', Validators.compose([
+        Validators.pattern('^[0-9 ()+-]+$'),
+        Validators.required
+      ])),
+      email: this.formBuilder.control('', Validators.compose([
+        Validators.required,
+        Validators.email
+      ])
+      ),
       gender: this.formBuilder.control(''),
       username: this.formBuilder.control('', Validators.compose([
         Validators.required,
         // Validators.pattern('[\\w\\-\\s\\/]+'),
-      ])),
+      ])
+      ),
       password: this.formBuilder.control('', Validators.compose([
         Validators.required,
         // Validators.pattern('[\\w\\-\\s\\/]+')
@@ -81,7 +93,7 @@ export class RegisterComponent implements OnInit {
   }
 
   isPasswordMatching(control) {
-    if (this.registerUserData.password !== this.registerUserData.confirmPassword ) {
+    if (this.registerUserData.password !== this.registerUserData.confirmPassword) {
       return {
         'password': false
       };

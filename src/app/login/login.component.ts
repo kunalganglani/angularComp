@@ -22,12 +22,12 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.form = this._formBuilder.group({
-      email: ['', Validators.required],
+      email: ['', Validators.compose([Validators.required, Validators.email])],
       password: ['', Validators.required]
     });
   }
 
-  isFieldInvalid(field: string) { // {6}
+  isFieldInvalid(field: string) {
     return (
       (!this.form.get(field).valid && this.form.get(field).touched) ||
       (this.form.get(field).untouched && this.formSubmitAttempt)

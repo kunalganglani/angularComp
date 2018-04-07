@@ -17,17 +17,17 @@
         <form [formGroup]="form" (ngSubmit)="onSubmit()">
           <p>Please login to continue</p>
           <mat-input-container class="full-width-input">
-            <input matInput placeholder="User" 
+            <input matInput placeholder="Email Id" 
                    formControlName="email" required>
             <mat-error *ngIf="isFieldInvalid('email')">
-              Please inform your user name
+              Please enter a valid email id
             </mat-error>
           </mat-input-container>
           <mat-input-container class="full-width-input">
             <input matInput type="password" placeholder="Password" 
                    formControlName="password" required>
             <mat-error *ngIf="isFieldInvalid('email')">
-              Please inform your password
+              Please enter your password
             </mat-error>
           </mat-input-container>
           <button mat-raised-button color="primary" type="submit" [disabled]="!form.valid">Login</button>
