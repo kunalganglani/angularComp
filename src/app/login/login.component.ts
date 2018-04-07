@@ -13,11 +13,6 @@ export class LoginComponent implements OnInit {
   form: FormGroup;
   private formSubmitAttempt: boolean;
 
-  loginUserData = {
-    email: '',
-    password: ''
-  };
-
   constructor(
     private _formBuilder: FormBuilder,
     public snackBar: MatSnackBar,
@@ -27,7 +22,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.form = this._formBuilder.group({
-      userName: ['', Validators.required],
+      email: ['', Validators.required],
       password: ['', Validators.required]
     });
   }
