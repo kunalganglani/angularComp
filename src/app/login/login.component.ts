@@ -50,7 +50,11 @@ export class LoginComponent implements OnInit {
           this._router.navigate(['/dashboard']);
         },
         err => {
-          this.openSnackBar(`Login Failed- ${err.error.text}`, 'Retry');
+          if (err.status === 401) {
+            this.openSnackBar(`Login Failed- ${err.error}`, 'Retry');
+          } else {
+            this.openSnackBar(`Login Failed- ${err.error.text}`, 'Retry');
+          }
           console.log(err);
         }
       );
