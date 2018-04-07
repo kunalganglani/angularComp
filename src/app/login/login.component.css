@@ -1,4 +1,4 @@
-.example-form {
+/* .example-form {
   min-width: 150px;
   max-width: 500px;
   width: 100%;
@@ -21,4 +21,16 @@ mat-card{
 .centerButton{
   left: 50%;
   transform: translate(-50%);
+} */
+
+mat-card {
+  max-width: 400px;
+  margin: 2em auto;
+  text-align: center;
+}
+.signin-content {
+  padding: 60px 1rem;
+}
+.full-width-input {
+  width: 100%;
 }

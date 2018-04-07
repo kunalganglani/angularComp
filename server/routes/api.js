@@ -5,8 +5,11 @@ const jwt = require('jsonwebtoken')
 
 const mongoose = require('mongoose');
 const db = "mongodb://kunalganglani:asdfjkl123@ds113670.mlab.com:13670/hrbuddymdc";
-
-mongoose.connect(db, function (err) {
+const options = {
+  reconnectTries: Number.MAX_VALUE,
+  reconnectInterval: 500
+};
+mongoose.connect(db, options, function (err) {
   if (err) {
     console.error('Error! ' + err)
   } else {

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth/services/auth.service';
 import { Router } from '@angular/router';
-import {MatSnackBar} from '@angular/material';
+import { MatSnackBar } from '@angular/material';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -9,31 +10,55 @@ import {MatSnackBar} from '@angular/material';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+  form: FormGroup;
+  private formSubmitAttempt: boolean;
+
   loginUserData = {
     email: '',
     password: ''
   };
 
-  constructor(public snackBar: MatSnackBar,
+  constructor(
+    private _formBuilder: FormBuilder,
+    public snackBar: MatSnackBar,
     private _auth: AuthService,
-    private _router: Router) { }
-
+    private _router: Router) {
+  }
 
   ngOnInit() {
+    this.form = this._formBuilder.group({
+      userName: ['', Validators.required],
+      password: ['', Validators.required]
+    });
   }
-  loginUser () {
-    this._auth.loginUser(this.loginUserData)
-    .subscribe(
-      res => {
-        this.openSnackBar('Login Successful', 'OK');
-        localStorage.setItem('token', res.token);
-        this._router.navigate(['/dashboard']);
-      },
-      err => {
-        this.openSnackBar('Login Failed', 'Retry');
-        console.log(err);
-      }
+
+  isFieldInvalid(field: string) { // {6}
+    return (
+      (!this.form.get(field).valid && this.form.get(field).touched) ||
+      (this.form.get(field).untouched && this.formSubmitAttempt)
     );
+  }
+
+  onSubmit() {
+    if (this.form.valid) {
+      this.loginUser();
+    }
+    this.formSubmitAttempt = true;
+  }
+
+  loginUser() {
+    this._auth.loginUser(this.form.value)
+      .subscribe(
+        res => {
+          this.openSnackBar('Login Successful', 'OK');
+          localStorage.setItem('token', res.token);
+          this._router.navigate(['/dashboard']);
+        },
+        err => {
+          this.openSnackBar(`Login Failed- ${err.error.text}`, 'Retry');
+          console.log(err);
+        }
+      );
   }
   openSnackBar(message: string, action: string) {
     this.snackBar.open(message, action, {
