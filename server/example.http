@@ -29,3 +29,15 @@ Content-Type: application/json
 	"password": "asdfjkl12"
 }
 
+###
+
+
+GET  http://localhost:3000/api/users
+
+###
+
+GET  http://localhost:3000/api/users/5ac285a415cecf1ac71a892e
+
+###
+
+DELETE http://localhost:3000/api/users/5ac285a415cecf1ac71a892e

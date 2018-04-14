@@ -5,6 +5,8 @@ const jwt = require('jsonwebtoken');
 var nodemailer = require('nodemailer');
 
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema,
+    ObjectId = mongoose.Types.ObjectId;
 const db = "mongodb://kunalganglani:asdfjkl123@ds113670.mlab.com:13670/hrbuddymdc";
 const options = {
   reconnectTries: Number.MAX_VALUE,
@@ -103,6 +105,29 @@ router.post('/register', (req, res) => {
     }
   })
 });
+router.delete('/users/:id', (req, res) => {
+  const id = req.params.id;
+  const details = {"_id": ObjectId(id)};
+  User.remove( details, (err,item)=>{
+    if (err) {
+      res.send({ 'error': 'An error has occurred' });
+    } else {
+      res.send('User with ' + id + ' deleted!');
+    }
+  });
+});
+router.get('/users/:id', (req, res) => {
+  User.findById(req.params.id, (err, userFound) => {
+    if (err) {
+      console.log(err);
+      res.send(err).status("500");
+    } else {
+      res.send(userFound).status("200");
+    }
+  });
+});
+
+
 router.get('/users', (req, res) => {
   User.find({}, (err, users) => {
     if (err) {
@@ -116,7 +141,7 @@ router.get('/users', (req, res) => {
       }
     }
   });
-})
+});
 router.post('/login', (req, res) => {
   let userData = req.body;
   User.findOne({ email: userData.email }, (err, user) => {
