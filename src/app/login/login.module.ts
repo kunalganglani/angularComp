@@ -4,9 +4,11 @@ import { LoginComponent } from './login.component';
 import { Routes, RouterModule } from '@angular/router';
 import { MaterialModule } from '../shared/material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { PasswordResetComponent } from './password-reset/password-reset.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent},
+  { path: 'password_reset', component: PasswordResetComponent},
   {path: '**', redirectTo: ''}
 ];
 
@@ -18,6 +20,6 @@ const routes: Routes = [
     ReactiveFormsModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [LoginComponent]
+  declarations: [LoginComponent, PasswordResetComponent]
 })
 export class LoginModule { }

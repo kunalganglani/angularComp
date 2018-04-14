@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../models/user');
-const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken');
+var nodemailer = require('nodemailer');
 
 const mongoose = require('mongoose');
 const db = "mongodb://kunalganglani:asdfjkl123@ds113670.mlab.com:13670/hrbuddymdc";
@@ -9,11 +10,19 @@ const options = {
   reconnectTries: Number.MAX_VALUE,
   reconnectInterval: 500
 };
+const databaseConnectionState = {
+  state: 'Loading',
+  message: 'Application Loading..'
+};
 mongoose.connect(db, options, function (err) {
   if (err) {
-    console.error('Error! ' + err)
+    databaseConnectionState.message = 'Error! ' + err;
+    databaseConnectionState.state = 'ConnectionError';
+    console.error(databaseConnectionState.message);
   } else {
-    console.log('Connected to mongodb')
+    databaseConnectionState.state = 'Connected';
+    databaseConnectionState.message = 'Connected to the database';
+    console.log(databaseConnectionState.message);
   }
 });
 

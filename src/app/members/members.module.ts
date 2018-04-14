@@ -4,10 +4,11 @@ import { MembersComponent } from './members.component';
 import { Routes, RouterModule } from '@angular/router';
 import { MaterialModule } from '../shared/material.module';
 import { HttpModule } from '@angular/http';
+import { AuthGuard } from '../auth/services/auth.gaurd';
 
 const routes: Routes = [
-  { path: '', component: MembersComponent},
-  {path: '**', redirectTo: ''}
+  { path: '', component: MembersComponent, canActivate: [AuthGuard] },
+  { path: '**', redirectTo: '' }
 ];
 
 @NgModule({
