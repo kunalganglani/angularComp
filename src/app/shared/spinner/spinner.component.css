@@ -1,3 +1,9 @@
 .example-margin {
     margin: 0 10px;
 }
+
+mat-progress-spinner{
+    width: 100px;
+    height: 100px;
+    left: calc(50% - 50px);
+}
