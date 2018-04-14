@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { User } from '../user';
 import { EventService } from '../event.service';
 import { UserService } from '../user.service';
+
 @Component({
   selector: 'app-members',
   templateUrl: './members.component.html',
@@ -9,10 +10,11 @@ import { UserService } from '../user.service';
 })
 export class MembersComponent implements OnInit {
   displayedColumns = ['firstName', 'lastName', 'contactNumber',
-     'email', 'gender', 'username'];
+     'email', 'gender', 'username', 'edit', 'delete'];
   // displayedColumns = ['id', 'name', 'description', 'date'];
   dataSource;
-  constructor(private _userService: UserService) {
+  constructor(private _userService: UserService
+  ) {
     this.setDataSource();
   }
   setDataSource(): any {
@@ -30,6 +32,9 @@ export class MembersComponent implements OnInit {
     // ];
   }
   ngOnInit() {
+  }
+  deleteRowUser(element) {
+    console.log(this);
   }
 
 }

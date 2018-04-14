@@ -27,7 +27,7 @@ const routes: Routes = [
   declarations: [
     AppComponent,
     HeaderBarComponent,
-    FooterBarComponent
+    FooterBarComponent,
   ],
   imports: [
     BrowserModule,

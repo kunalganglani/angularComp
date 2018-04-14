@@ -3,7 +3,7 @@ import { AuthService } from '../auth/services/auth.service';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-
+import { SpinnerService } from '../shared/spinner/spinner.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -15,6 +15,7 @@ export class LoginComponent implements OnInit {
   private formSubmitAttempt: boolean;
 
   constructor(
+    private spinnerService: SpinnerService,
     private _formBuilder: FormBuilder,
     public snackBar: MatSnackBar,
     private _auth: AuthService,
@@ -47,6 +48,7 @@ export class LoginComponent implements OnInit {
   }
 
   loginUser() {
+    this.spinnerService.show('mySpinner');
     if (this.form.get('email').value === 'admin@admin.com' && this.form.get('password').value === 'Welcome@123' ) {
       this.openSnackBar('Login Successful', 'OK');
           localStorage.setItem('token', 'abc');
@@ -56,10 +58,12 @@ export class LoginComponent implements OnInit {
       .subscribe(
         res => {
           this.openSnackBar('Login Successful', 'OK');
+          this.spinnerService.hide('mySpinner');
           localStorage.setItem('token', res.token);
           this._router.navigate(['/dashboard']);
         },
         err => {
+          this.spinnerService.hide('mySpinner');
           if (err.status === 401) {
             this.openSnackBar(`Login Failed- ${err.error}`, 'Retry');
           } else {
