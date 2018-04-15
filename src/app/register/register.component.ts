@@ -93,14 +93,13 @@ export class RegisterComponent implements OnInit {
   }
 
   isPasswordMatching(control) {
-    if (this.registerUserData.password !== this.registerUserData.confirmPassword) {
-      return {
-        'password': false
-      };
+    return null;
+    /* if (this.registerUserData.password !== this.registerUserData.confirmPassword) {
+      return null;
     }
     return {
       'password': true
-    };
+    }; */
   }
   yearValidator(control) {
     if (control.value.trim().length === 0) {

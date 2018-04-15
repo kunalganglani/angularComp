@@ -109,10 +109,10 @@ router.delete('/users/:id', (req, res) => {
   const id = req.params.id;
   const details = {"_id": ObjectId(id)};
   User.remove( details, (err,item)=>{
-    if (err) {
-      res.send({ 'error': 'An error has occurred' });
+    if (!err) {
+      res.send({'message': 'User with ' + id + ' deleted!'}).status('204');
     } else {
-      res.send('User with ' + id + ' deleted!');
+      res.send({ 'error': 'An error has occurred' }).status('500');
     }
   });
 });

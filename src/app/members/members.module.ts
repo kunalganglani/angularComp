@@ -5,6 +5,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { MaterialModule } from '../shared/material.module';
 import { HttpModule } from '@angular/http';
 import { AuthGuard } from '../auth/services/auth.gaurd';
+import { CoreModule } from '../shared/core/core.module';
 
 const routes: Routes = [
   { path: '', component: MembersComponent, canActivate: [AuthGuard] },
@@ -16,6 +17,7 @@ const routes: Routes = [
     CommonModule,
     MaterialModule,
     HttpModule,
+    CoreModule,
     RouterModule.forChild(routes)
   ],
   declarations: [MembersComponent]

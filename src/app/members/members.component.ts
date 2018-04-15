@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { User } from '../user';
 import { EventService } from '../event.service';
 import { UserService } from '../user.service';
+import { AuthService } from '../auth/services/auth.service';
+import { SpinnerService } from '../shared/spinner/spinner.service';
+import { MatSnackBar } from '@angular/material';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-members',
@@ -10,10 +14,15 @@ import { UserService } from '../user.service';
 })
 export class MembersComponent implements OnInit {
   displayedColumns = ['firstName', 'lastName', 'contactNumber',
-     'email', 'gender', 'username', 'edit', 'delete'];
+    'email', 'gender', 'username', 'edit', 'delete'];
   // displayedColumns = ['id', 'name', 'description', 'date'];
   dataSource;
-  constructor(private _userService: UserService
+  constructor(
+    public snackBar: MatSnackBar,
+    private _spinnerService: SpinnerService,
+    private _userService: UserService,
+    private _auth: AuthService,
+    private _router: Router
   ) {
     this.setDataSource();
   }
@@ -22,9 +31,10 @@ export class MembersComponent implements OnInit {
       .subscribe(
         res => {
           this.dataSource = res;
-          // console.log(this.dataSource);
-        },
-        err => console.log(err)
+          },
+        err => {
+          this.openSnackBar(`Error: ${err.error.text}`, 'Register a few users');
+        }
       );
     // this.dataSource = [
     //   {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
@@ -33,8 +43,28 @@ export class MembersComponent implements OnInit {
   }
   ngOnInit() {
   }
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 2000,
+    });
+  }
   deleteRowUser(element) {
-    console.log(this);
+    this._spinnerService.show('mySpinner');
+    this._auth.deleteUser(element._id)
+      .subscribe(
+        res => {
+          this.openSnackBar(`User with username: ${element.username}- Deleted Successful`, 'OK');
+          this._spinnerService.hide('mySpinner');
+        },
+        err => {
+          this._spinnerService.hide('mySpinner');
+          this.openSnackBar(`Delete Failed- ${err.error}`, 'Retry');
+        },
+
+        () => {
+          this.setDataSource();
+        }
+      );
   }
 
 }
