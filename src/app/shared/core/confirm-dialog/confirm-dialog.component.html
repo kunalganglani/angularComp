@@ -1,0 +1,12 @@
+<div mat-dialog-title class="row between-xs middle-xs">
+  <h6 [innerHTML]="title"></h6>
+  <a class="dialog-close" (click)="closeDialog(false)">
+    <i class="fa fa-times-circle"></i>
+  </a>
+</div>
+<div mat-dialog-content class="padding-30" [innerHTML]="content">
+</div>
+<div mat-dialog-actions>
+  <button mat-raised-button  cdkFocusInitial color="primary" (click)="closeDialog(false)" [innerHTML]="cancelButtonText || 'No'"></button>
+  <button mat-button type="button" (click)="closeDialog(true)" [innerHTML]="confirmButtonText || 'Yes'"></button>
+</div>

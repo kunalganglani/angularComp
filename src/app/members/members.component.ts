@@ -6,6 +6,7 @@ import { AuthService } from '../auth/services/auth.service';
 import { SpinnerService } from '../shared/spinner/spinner.service';
 import { MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
+import { ConfirmDialogService } from '../shared/core/services/confirm-dialog.service';
 
 @Component({
   selector: 'app-members',
@@ -22,7 +23,8 @@ export class MembersComponent implements OnInit {
     private _spinnerService: SpinnerService,
     private _userService: UserService,
     private _auth: AuthService,
-    private _router: Router
+    private _router: Router,
+    private _confirmDialogService: ConfirmDialogService,
   ) {
     this.setDataSource();
   }
@@ -31,7 +33,7 @@ export class MembersComponent implements OnInit {
       .subscribe(
         res => {
           this.dataSource = res;
-          },
+        },
         err => {
           this.openSnackBar(`Error: ${err.error.text}`, 'Register a few users');
         }
@@ -48,7 +50,7 @@ export class MembersComponent implements OnInit {
       duration: 2000,
     });
   }
-  deleteRowUser(element) {
+  performDelete(element) {
     this._spinnerService.show('mySpinner');
     this._auth.deleteUser(element._id)
       .subscribe(
@@ -65,6 +67,16 @@ export class MembersComponent implements OnInit {
           this.setDataSource();
         }
       );
+  }
+  deleteRowUser(element) {
+    this._confirmDialogService.confirm('Delete User', 'Are you sure want to delete the user?')
+      .then((confirmed) => {
+        if (confirmed) {
+          this.performDelete(element);
+          // dispatch delete store action here
+          // this.store.dispatch(new userStore.DeleteUser(user.id));
+        }
+      });
   }
 
 }

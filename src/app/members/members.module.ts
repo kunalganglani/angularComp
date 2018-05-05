@@ -8,7 +8,25 @@ import { AuthGuard } from '../auth/services/auth.gaurd';
 import { CoreModule } from '../shared/core/core.module';
 
 const routes: Routes = [
-  { path: '', component: MembersComponent, canActivate: [AuthGuard] },
+  {
+    path: '', canActivate: [AuthGuard],
+    children: [
+      {
+        path: 'list', component: MembersComponent,
+        /* children: [
+          {
+            path: 'add-device', data: { title: 'Add Device' },
+            component: AddEditDeviceDialogComponent
+          },
+          {
+            path: 'edit-device/:id',
+            component: AddEditDeviceDialogComponent,
+            data: { title: 'Edit Device' }
+          }] */
+      },
+      { path: '**', redirectTo: 'list' }
+    ]
+  },
   { path: '**', redirectTo: '' }
 ];
 
