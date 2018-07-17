@@ -30,6 +30,7 @@
         </button>
     </mat-toolbar>
     <mat-menu #appMenu>
+        <button mat-menu-item *ngIf="_authService.loggedIn()" routerLink="/dashboard" routerLinkActive="active"> Dashboard </button>
         <button mat-menu-item routerLink="/events" routerLinkActive="active"> Events </button>
         <button mat-menu-item routerLink="/members" routerLinkActive="active"> Members </button>
         <button mat-menu-item *ngIf="!_authService.loggedIn()" routerLink="/login" routerLinkActive="active"> Login </button>
