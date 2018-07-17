@@ -10,6 +10,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve --aot",
+    "server": "nodemon ./server/server",
     "startall": "ng serve --aot | nodemon ./server/server",
     "build": "ng build --prod",
     "test": "ng test",
@@ -63,6 +64,7 @@
     "karma-coverage-istanbul-reporter": "^1.2.1",
     "karma-jasmine": "~1.1.0",
     "karma-jasmine-html-reporter": "^0.2.2",
+    "nodemon": "^1.18.2",
     "protractor": "~5.1.2",
     "ts-node": "~4.1.0",
     "tslint": "~5.9.1",
